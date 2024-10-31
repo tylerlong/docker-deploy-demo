@@ -5,9 +5,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "lint": "tsc --jsx react --skipLibCheck --noEmit --target ESNext --moduleResolution NodeNext --module NodeNext ./src/*.ts && eslint . --fix && prettier --write . && sort-package-json",
-    "serve": "rm -rf .parcel-cache && parcel src/index.html --dist-dir docs"
+    "serve": "rm -rf .parcel-cache temp && parcel src/index.html --dist-dir temp",
+    "build": "rm -rf .parcel-cache docs && parcel build src/index.html --dist-dir docs"
   },
   "devDependencies": {
+    "@parcel/transformer-typescript-tsc": "^2.12.0",
     "@types/node": "^22.8.5",
     "@types/react-dom": "^18.3.1",
     "antd": "^5.21.6",
@@ -15,6 +17,7 @@
     "eslint-config-tyler": "^0.1.8",
     "manate": "^0.9.8",
     "parcel": "^2.12.0",
+    "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sort-package-json": "^2.10.1",
