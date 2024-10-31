@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "tsc --jsx react --skipLibCheck --noEmit --target ESNext --moduleResolution NodeNext --module NodeNext ./src/*.ts && eslint . --fix && prettier --write . && sort-package-json",
     "serve": "rm -rf .parcel-cache temp && parcel src/index.html --dist-dir temp",
-    "build": "rm -rf .parcel-cache docs && parcel build src/index.html --dist-dir docs"
+    "build": "rm -rf .parcel-cache docs && parcel build src/index.html --dist-dir docs --public-url ./",
+    "deploy": "yarn build && docker build -t docker-deploy-demo . && docker run -p 8080:80 docker-deploy-demo"
   },
   "devDependencies": {
     "@parcel/transformer-typescript-tsc": "^2.12.0",
