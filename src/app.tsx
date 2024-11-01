@@ -1,31 +1,45 @@
 import { Button, Space, Typography } from 'antd';
 import { auto } from 'manate/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Store } from './store';
+import { signInWithGithub, signInWithGoogle, supabase } from './supabase';
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 
-const App = auto((props: { store: Store }) => {
-  const { store } = props;
+const App = auto(() => {
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        // User is signed in
+        console.log('User signed in:', session.user);
+      } else {
+        // User is signed out
+        console.log('User signed out');
+      }
+    });
+
+    // Cleanup on unmount
+    return () => {
+      data.subscription?.unsubscribe();
+    };
+  }, []);
   return (
     <>
       <Title>Untitled App</Title>
       <Space>
         <Button
           onClick={() => {
-            store.count -= 1;
+            signInWithGithub();
           }}
         >
-          -
+          Sign in with GitHub
         </Button>
-        <Text>{store.count}</Text>
         <Button
           onClick={() => {
-            store.count += 1;
+            signInWithGoogle();
           }}
         >
-          +
+          Sign in with Google
         </Button>
       </Space>
     </>
