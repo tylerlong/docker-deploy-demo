@@ -3,12 +3,7 @@ import { auto } from 'manate/react';
 import React from 'react';
 
 import { Store } from './store';
-import {
-  signInWithGithub,
-  signInWithGoogle,
-  signOut,
-  supabase,
-} from './supabase';
+import { supabase } from './supabase';
 
 const { Title } = Typography;
 
