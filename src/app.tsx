@@ -1,46 +1,49 @@
 import { Button, Space, Typography } from 'antd';
 import { auto } from 'manate/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { signInWithGithub, signInWithGoogle, supabase } from './supabase';
+import { Store } from './store';
+import {
+  signInWithGithub,
+  signInWithGoogle,
+  signOut,
+  supabase,
+} from './supabase';
 
 const { Title } = Typography;
 
-const App = auto(() => {
-  useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        // User is signed in
-        console.log('User signed in:', session.user);
-      } else {
-        // User is signed out
-        console.log('User signed out');
-      }
-    });
-
-    // Cleanup on unmount
-    return () => {
-      data.subscription?.unsubscribe();
-    };
-  }, []);
+const App = auto((props: { store: Store }) => {
+  const { store } = props;
   return (
     <>
       <Title>Untitled App</Title>
       <Space>
-        <Button
-          onClick={() => {
-            signInWithGithub();
-          }}
-        >
-          Sign in with GitHub
-        </Button>
-        <Button
-          onClick={() => {
-            signInWithGoogle();
-          }}
-        >
-          Sign in with Google
-        </Button>
+        {store.supabaseSession ? (
+          <>
+            <Button onClick={() => supabase.auth.signOut()}>Sign out</Button>
+          </>
+        ) : (
+          <>
+            <Button
+              onClick={() =>
+                supabase.auth.signInWithOAuth({
+                  provider: 'github',
+                })
+              }
+            >
+              Sign in with GitHub
+            </Button>
+            <Button
+              onClick={() =>
+                supabase.auth.signInWithOAuth({
+                  provider: 'google',
+                })
+              }
+            >
+              Sign in with Google
+            </Button>
+          </>
+        )}
       </Space>
     </>
   );
