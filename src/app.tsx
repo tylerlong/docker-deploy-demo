@@ -1,4 +1,4 @@
-import { Button, Space, Typography } from 'antd';
+import { Avatar, Button, Space, Typography } from 'antd';
 import { auto } from 'manate/react';
 import React from 'react';
 
@@ -15,6 +15,14 @@ const App = auto((props: { store: Store }) => {
       <Space>
         {store.supabaseSession ? (
           <>
+            <Avatar
+              src={
+                <img
+                  src={store.supabaseSession.user?.user_metadata.avatar_url}
+                  alt="avatar"
+                />
+              }
+            />
             <Button onClick={() => supabase.auth.signOut()}>Sign out</Button>
           </>
         ) : (
