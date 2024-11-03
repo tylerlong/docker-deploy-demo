@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './components/home';
 import Post from './components/post';
 import EditPost from './components/post/edit';
+import NewPost from './components/post/new';
 import store from './store';
 
 const root = createRoot(document.getElementById('root')!);
@@ -14,7 +15,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Home store={store} />} />
         <Route path="/post/:id" element={<Post store={store} />} />
-        <Route path="/post/new" element={<EditPost store={store} />} />
+        <Route path="/post/new" element={<NewPost store={store} />} />
         <Route path="/post/edit/:id" element={<EditPost store={store} />} />
       </Routes>
     </Router>

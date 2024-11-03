@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Store } from '../../store';
 import NotFound from '../404';
 import Login from '../login';
-import EditForm from './edit-form';
+import PostForm from './form';
 
 const EditPost = (props: { store: Store }) => {
   const { store } = props;
@@ -17,7 +17,7 @@ const EditPost = (props: { store: Store }) => {
   if (!post) {
     return <NotFound />;
   }
-  return <EditForm post={post} store={store} />;
+  return <PostForm post={post} store={store} />;
 };
 
 export default auto(EditPost);

@@ -44,6 +44,7 @@ const Home = (props: { store: Store }) => {
           </li>
         ))}
       </ul>
+      <Link to="/post/new">New Post</Link>
     </>
   );
 };
