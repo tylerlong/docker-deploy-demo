@@ -3,7 +3,7 @@ import { $, exclude, manage } from 'manate';
 
 import { supabase } from './supabase';
 
-class Post {
+export class Post {
   id: string;
   title: string;
   content: string;
