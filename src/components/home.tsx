@@ -8,7 +8,7 @@ import { supabase } from '../supabase';
 import Login from './login';
 
 const { Title } = Typography;
-const Home = auto((props: { store: Store }) => {
+const Home = (props: { store: Store }) => {
   const { store } = props;
   if (!store.session) {
     return <Login />;
@@ -46,6 +46,6 @@ const Home = auto((props: { store: Store }) => {
       </ul>
     </>
   );
-});
+};
 
-export default Home;
+export default auto(Home);

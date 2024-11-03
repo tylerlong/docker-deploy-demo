@@ -9,24 +9,22 @@ import Login from '../login';
 
 const { Title, Text } = Typography;
 
-const Post = auto((props: { store: Store }) => {
+const Post = (props: { store: Store }) => {
   const { store } = props;
+  const { id } = useParams();
   if (!store.session) {
     return <Login />;
   }
-
-  const { id } = useParams();
   const post = store.posts.find((post) => post.id === id);
   if (!post) {
     return <NotFound />;
   }
-
   return (
     <>
       <Title>{post.title}</Title>
       <Text>{post.content}</Text>
     </>
   );
-});
+};
 
-export default Post;
+export default auto(Post);
