@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
 
-import { supabase } from './supabase';
+import { supabase } from '../supabase';
 
 const Login = () => {
   return (
